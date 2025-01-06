@@ -1,10 +1,13 @@
 import { useState,useMemo} from 'react';
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from 'axios'; // 통신모듈
 
 const IDIOM_URL = "http://127.0.0.1:5500/src/data/idiom2.json"
 const IDIOM_LENGTH = 10
 // 문제 개수 확인 
 let count = 0;
+let correctAnswers = 0;
+
 
 // 사자성어 데이터 가져오기
 async function getAllProducts() {
@@ -18,6 +21,9 @@ async function getAllProducts() {
 
 
 function Qustion() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const nickname = location.state.nickname;
   const [answer,setAnswer] = useState("");
   const [alldata,setAlldata] = useState("")
   const [question,setQuestion] = useState({
@@ -41,6 +47,7 @@ function Qustion() {
     }
     else {
       console.log("정답입니다");
+      correctAnswers+=1;
       setChecked(2);
     }
     setAnswer("");
@@ -48,6 +55,10 @@ function Qustion() {
     // 문제 카운팅
     count+=1;
     console.log("문제 개수 확인 : "+count);
+    if (count===10) {
+      navigate('/Rank',{state:{nickname,correctAnswers}});
+      console.log("전송", nickname,correctAnswers);
+    }
     
   }
 

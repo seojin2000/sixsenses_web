@@ -33,7 +33,7 @@ function MyInput() {
         }
         // navigate를 사용하여 다음페이지 전달
         else {
-            navigate('/Qustion?query='+ nickname,{state:{nickname}});
+            navigate('/Qustion',{state:{nickname}});
             console.log("전송", nickname);
         }
         setnickname("");
