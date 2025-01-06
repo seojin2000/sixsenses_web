@@ -1,3 +1,7 @@
+/**
+ * 1. 로그인(닉네임 페이지 관련 코드)
+ *  - 공백,중복 체크 확인하기
+ */
 import {useNavigate} from 'react-router-dom'
 import React from "react";
 
