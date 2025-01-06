@@ -4,6 +4,8 @@
  */
 import {useNavigate} from 'react-router-dom'
 import React from "react";
+import '../TailWindStyle.css';
+
 
 import {  
     useState,       // 상태변수 -> 화면갱신
@@ -43,38 +45,50 @@ function MyInput() {
         setnickname("");
     }
 
-    const inputstyle = {
-        border : '1px solid black',
-        borderRadius : '5px',
-        height : '3em',
-        width : '30em',
-        textAlign : 'center'
-    }
+    // const inputstyle = {
+    //     border : '1px solid black',
+    //     borderRadius : '5px',
+    //     height : '3em',
+    //     width : '30em',
+    //     textAlign : 'center'
+    // }
     
-    const buttonstyle = {
-        backgroundColor : 'red',
-        color : 'white',
-        border : '1px solid black',
-        borderRadius : '5px',
-        margin : '10em',
-        height : '3em',
-        width : '8em'
-    }
+    // const buttonstyle = {
+    //     backgroundColor : 'red',
+    //     color : 'white',
+    //     border : '1px solid black',
+    //     borderRadius : '5px',
+    //     margin : '10em',
+    //     height : '3em',
+    //     width : '8em'
+    // }
 
     return (
-        
-        <div >
-            닉네임을 입력해주세요
-            <form onSubmit={onSubmitHandler}>
-                <input 
-                type="text"
-                value={nickname}
-                placeholder="닉네임을 입력해주세요" onChange={onChangeHandler}
-                style={inputstyle}/>
-                <br/>
-                <button onClick={() => {
-                }} style={buttonstyle}> 게임 시작</button>
+        <div className="flex justify-center items-center min-h-screen bg-yellow-100">
+            <div className="w-[390px] h-[874px] mx-auto bg-white relative ">
+            <div className="flex flex-col h-full p-4">
+
+            <div className="pt-20 pb-6 "> 
+                <h1>닉네임을 입력해주세요</h1>
+                <form onSubmit={onSubmitHandler}>
+                    <input 
+                    className='outline outline-offset-2 outline-yellow-500/50'
+                    type="text"
+                    value={nickname}
+                    placeholder="닉네임을 입력해주세요" onChange={onChangeHandler}
+                    />
+                    
+                    <div className="mt-20 outline outline-offset-2 outline-yellow-500/50 
+                                hover:bg-yellow-500 transition-colors ">
+                    <button onClick={() => {
+                    }} > 게임 시작</button>
+                    </div>
             </form>
+            </div>
+
+           
+            </div>
+            </div>
         </div>
     );}
 

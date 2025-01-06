@@ -120,11 +120,13 @@ function Qustion() {
           <br/>
           <input 
           type='text'
-          className='Anwser'
+          className='outline outline-offset-2 outline-blue-500/50'
           value={answer}
           onChange={onChangeHandler}/>
           {/* 버튼 타입을 안하면 새로고침이 발생할수 있다. */}
-          <button type="button" onClick={onSubmitHandler} style={buttonStyle}> {'>'} </button>
+          <button 
+          className='outline outline-offset-2 outline-green-500/50'
+          type="button" onClick={onSubmitHandler} style={buttonStyle}> {'>'} </button>
           </form>
       );
     }
@@ -134,7 +136,9 @@ function Qustion() {
         <form>
           {showWord}
           <p>오답입니다</p>
-          <button type='button' onClick={onSubmitHandler2} style={buttonStyle}> {'다음 문제'}</button>
+          <button 
+          className='outline outline-offset-2 outline-green-500/50'
+          type='button' onClick={onSubmitHandler2} style={buttonStyle}> {'다음 문제'}</button>
         </form>
       );
     }
@@ -145,14 +149,16 @@ function Qustion() {
         <form>
           {showWord}
           <p>정답입니다</p>
-          <button type='button' onClick={onSubmitHandler2} style={buttonStyle}> {'다음 문제'}</button>
+          <button 
+          className='outline outline-offset-2 outline-green-500/50'
+          type='button' onClick={onSubmitHandler2} style={buttonStyle}> {'다음 문제'}</button>
       </form>
     );
     }
   }
 
   return (
-    <div>
+    <div >
       <p> {question.mean}</p>
       {formChange()}
     </div>
