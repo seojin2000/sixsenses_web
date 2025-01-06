@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import userData from '../data/users.json';
+import '../TailWindStyle.css';
+
 
 const Rank = () => {
   const [isToggled, setIsToggled] = useState(false);
@@ -41,7 +43,8 @@ const Rank = () => {
   const currentUser = users.find(user => user.name === name) || users[0];
 
   return (
-    <div className="w-[390px] h-[844px] mx-auto bg-white relative">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+       <div className="w-[390px] h-[844px] mx-auto bg-white relative ">
       <div className="flex flex-col h-full p-4">
         
 
@@ -95,6 +98,8 @@ const Rank = () => {
         </div>
       </div>
     </div>
+    </div>
+   
   );
 };
 
