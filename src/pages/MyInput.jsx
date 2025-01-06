@@ -1,3 +1,7 @@
+/**
+ * 1. 로그인(닉네임 페이지 관련 코드)
+ *  - 공백,중복 체크 확인하기
+ */
 import {useNavigate} from 'react-router-dom'
 import React from "react";
 
@@ -6,28 +10,34 @@ import {
 } from "react";
 
 function MyInput() {
+    // 별명(닉네임) 입력 초기 설정
     const [nickname,setnickname] = useState("");
 
     // 다음 페이지 전달
     const navigate = useNavigate();
 
+    // input 값 입력시 변경되게 설정
     function onChangeHandler(evt) {
         let ori_text = evt.target.value;
         setnickname(ori_text)
 
     }
+    // 제출했을 때 반응하는 핸들러
     function onSubmitHandler(evt) {
         evt.preventDefault();
+        // 공백 체크 
         if (nickname.length===0) {
-            // 공백 체크 
             alert("닉네임을 입력해주세요")
         }
+        // 중복 체크
+        //TODO 1.추후에 유효성 체크
         else if (nickname==='김강빈') {
             // 추후에 유효성 검사
             alert("다른 닉네임으로 입력해주세요")
         }
+        // navigate를 사용하여 다음페이지 전달
         else {
-            navigate('/Qustion?query='+ nickname,{state:{nickname}});
+            navigate('/Qustion',{state:{nickname}});
             console.log("전송", nickname);
         }
         setnickname("");
