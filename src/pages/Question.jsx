@@ -11,31 +11,35 @@ import { AiFillCaretRight } from "react-icons/ai";
 // import { IconButton } from "@material-tailwind/react";
 
 const IDIOM_URL = "http://127.0.0.1:5500/src/data/idiom2.json"
-const IDIOM_LENGTH = 10
 // 문제 개수 확인 
 let count = 0;
 let correctAnswers = 0;
+
+// 중복체크 배열
+let duplicateCheck = []
+
 
 // 사자성어 데이터 가져오기
 async function getAllProducts() {
   const res = await axios.get(IDIOM_URL);
   return res.data.map((product,idx) => {
-      const {word,mean} = product
-      return ({word,mean}
+      const {word,hanja,meaning} = product
+      return ({word,hanja,meaning}
       );
   });
 }
 
 
-export function Qustion() {
+function Qustion() {
   const navigate = useNavigate();
   const location = useLocation();
   const nickname = location.state.nickname;
   const [answer,setAnswer] = useState("");
   const [alldata,setAlldata] = useState("")
   const [question,setQuestion] = useState({
-    mean : "어릴 때부터 같이 놀던 가까운 친구",
-    word : "죽마고우"
+    meaning : "어릴 때부터 같이 놀던 가까운 친구",
+    word : "죽마고우",
+    hanja : "竹馬故友"
   });
   const [checked,setChecked] = useState(0);
   
@@ -82,9 +86,14 @@ export function Qustion() {
 
   // 랜덤 문제 설정
   function onRandomHandler(evt) {
-    //TODO 중복여부 체크 진행 코드 만들기
-    const Randomidx = parseInt(Math.random()*IDIOM_LENGTH);
+    // 중복여부 체크 진행 코드 만들기(해결완료)
+    let Randomidx;
+    do{
+      Randomidx = parseInt(Math.random()*alldata.length); 
+    } while(duplicateCheck.includes(Randomidx))
+    duplicateCheck.push(Randomidx);
     let ranVal = alldata[Randomidx];
+    console.log("중복배열 : ",duplicateCheck)
     setQuestion(ranVal);
     setChecked(0);
   }
@@ -109,7 +118,7 @@ export function Qustion() {
   //   const Randomidx = parseInt(Math.random()*IDIOM_LENGTH);
   //   let ranVal = alldata[Randomidx];
   //   console.log(ranVal,alldata);
-  //   // setQuestion([ranVal.mean,ranVal.answer])
+  //   // setQuestion([ranVal.meaning,ranVal.answer])
   //   // console.log("선택된 값 :",question );
   // },[]);
 
@@ -147,10 +156,11 @@ export function Qustion() {
     }
     else if (checked===1) {
       let showWord = question.word
+      let showhanja = question.hanja
       return (
         <form id="inputForm" className="flex flex-col justify-center items-center gap-4 w-full px-6">
             <p className="text-red-500 font-semibold">오답!</p>
-            <p className="px-4 py-2 rounded-md text-x1 ">{showWord}</p>
+            <p className="px-4 rounded-md text-x1 ">{showWord} {"("}{showhanja}{")"}</p>
             
 
             <div
@@ -170,11 +180,11 @@ export function Qustion() {
     }
     else {
       let showWord = question.word
-      console.log(showWord);
+      let showhanja = question.hanja
       return (
         <form id="inputForm" className="flex flex-col justify-center items-center gap-4 w-full px-6">
             <p className="text-blue-500 font-semibold">정답!</p>
-            <p className="px-4 py-2 rounded-md text-x1 ">{showWord}</p>
+            <p className="px-4 rounded-md text-x1 ">{showWord} {"("}{showhanja}{")"}</p>
             
 
             <div
@@ -199,9 +209,8 @@ export function Qustion() {
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
     <div className="w-[390px] h-[874px] bg-white rounded-lg shadow-lg flex flex-col justify-center items-center">
         <div className="pb-6 text-center">
-            <p className="text-xl font-bold px-4">{question.mean}</p>
+            <p className="text-xl font-bold px-4">{question.meaning}</p>
         </div>
-
       
       {formChange()}
     </div>

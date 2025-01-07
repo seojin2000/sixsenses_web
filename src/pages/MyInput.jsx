@@ -51,8 +51,11 @@ function MyInput() {
         <div className="w-[390px] h-[874px] bg-white rounded-lg shadow-lg flex flex-col justify-center items-center">
         <div className="flex flex-col h-full p-4 w-full">
             <form onSubmit={onSubmitHandler} className="flex flex-col justify-center items-center w-full h-full">
+                <div>
+                    <h1 className="text-4xl font-bold">사자성어 테스트</h1>
+                </div>
                 <div className="pt-20 pb-6 text-center">
-                    <h1 className="text-xl font-bold">닉네임을 입력해주세요</h1>
+                    <h1 className="text-xl font-bold">이름(별명)을 입력해주세요</h1>
                 </div>
                 <div className="pb-20 mb-20 w-full flex justify-center">
                     <input
@@ -62,7 +65,7 @@ function MyInput() {
                         text-lg placeholder:text-center"
                         type="text"
                         value={nickname}
-                        placeholder="닉네임을 입력해주세요"
+                        placeholder="이름(별명)을 입력해주세요"
                         onChange={onChangeHandler}
                     />
                 </div>

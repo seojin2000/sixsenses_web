@@ -19,7 +19,6 @@ const Router = () => {
                 <Route path="/" element={<MyInput />} /> // 닉네임
                 <Route path="/Qustion" element={<Question />} /> // 문제를 푸는곳                
                 <Route path="/Rank" element={<Rank />} /> // 랭킹 페이지
-                
             </Routes>
         </BrowserRouter>
     );
