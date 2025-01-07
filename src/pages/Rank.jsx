@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import userData from '../data/users.json';
 import '../TailWindStyle.css';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Rank = () => {
   const [isToggled, setIsToggled] = useState(false);
   const location = useLocation();
   const nickname = location.state?.nickname;  // state에서 nickname 가져오기, ?: ull 방지
   const correctAnswers = location.state?.correctAnswers;  // correctAnswers 가져오기
+  const navigate = useNavigate();
 
   // 점수가 높은 순으로 정렬하고 상위 5명만 선택
   const topFiveUsers = userData.users
@@ -20,9 +21,8 @@ const Rank = () => {
   const getSurroundingRankUsers = () => {
     const sortedUsers = userData.users.sort((a, b) => b.score - a.score);
     
-    // name과 일치하는 사용자의 인덱스 찾기
+    // name과 일치하는 사용자의 인덱스 찾기WWW
     const currentIndex = sortedUsers.findIndex(user => user.name === nickname);
-    
     if (currentIndex === -1) {
       return (
         topFiveUsers,
@@ -77,7 +77,10 @@ const Rank = () => {
 
         {/* 재도전 버튼 영역 */}
         <div className="py-6">
-          <button className="w-full bg-yellow-300 py-3 rounded-md hover:bg-yellow-400 transition-colors">
+          <button 
+            className="w-full bg-yellow-300 py-3 rounded-md hover:bg-yellow-400 transition-colors"
+            onClick={() => navigate('/')}
+          >
             재도전
           </button>
         </div>
