@@ -42,7 +42,7 @@ function MyInput() {
     return (
         // TailWindStyle CSS를 사용하여 폼 구축진행
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
-            <div className="w-[390px] h-[844px] bg-white rounded-lg shadow-lg flex flex-col justify-center items-center">
+            <div className="w-[390px] h-[874px] bg-white rounded-lg shadow-lg flex flex-col justify-center items-center">
                 <div className="flex flex-col h-full p-4 w-full">
                     <form onSubmit={onSubmitHandler} className="flex flex-col justify-center items-center w-full h-full">
                         <div className="mt-4">

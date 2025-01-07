@@ -199,7 +199,7 @@ function Qustion() {
   return (
 
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
-    <div className="w-[390px] h-[844px] bg-white rounded-lg shadow-lg flex flex-col justify-center items-center">
+    <div className="w-[390px] h-[874px] bg-white rounded-lg shadow-lg flex flex-col justify-center items-center">
         <div className="pb-6 text-center">
             <p className="text-xl font-bold px-4">{question.meaning}</p>
         </div>
