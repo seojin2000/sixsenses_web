@@ -1,25 +1,15 @@
 import './App.css';
 import Router from './shared/Router';
 import React from 'react';
-//import ListPage from './pages/ListPage;
-// import MyInput from './pages/MyInput';
-// import { BrowserRouter } from "react-router-dom";
-
-
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="w-full min-h-screen bg-gray-100 flex justify-center items-center">
+      <header className="w-96 h-screen bg-white relative overflow-auto ">
         <React.StrictMode>
-        <Router />
+          <Router />
         </React.StrictMode>
-        {/* <MyInput/> */}
-        
       </header>
-      
-     
-  
     </div>
   );
 }

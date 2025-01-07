@@ -8,14 +8,14 @@ function FlashScreen() {
     useEffect(() => {
         const timer = setTimeout(() => {
             navigate('/input');
-        }, 1500);
+        }, 3000);
 
         return () => clearTimeout(timer);
     }, [navigate]);
 
     return (
-        <div className="flex flex-col justify-center items-center min-h-screen bg-gray-100">
-            <div className="w-[390px] h-[844px] bg-white relative flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center min-h-screen bg-gray-100 overflow-hidden">
+            <div className="w-[390px] h-[874px] bg-white relative rounded-lg shadow-lg flex flex-col justify-center items-center">
                 {/* 로딩 스피너 */}
                 <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-yellow-400 mb-8"></div>
                 
