@@ -4,6 +4,8 @@
  */
 import {useNavigate} from 'react-router-dom'
 import React from "react";
+import '../TailWindStyle.css';
+
 
 import {  
     useState,       // 상태변수 -> 화면갱신
@@ -43,39 +45,60 @@ function MyInput() {
         setnickname("");
     }
 
-    const inputstyle = {
-        border : '1px solid black',
-        borderRadius : '5px',
-        height : '3em',
-        width : '30em',
-        textAlign : 'center'
-    }
+    // const inputstyle = {
+    //     border : '1px solid black',
+    //     borderRadius : '5px',
+    //     height : '3em',
+    //     width : '30em',
+    //     textAlign : 'center'
+    // }
     
-    const buttonstyle = {
-        backgroundColor : 'red',
-        color : 'white',
-        border : '1px solid black',
-        borderRadius : '5px',
-        margin : '10em',
-        height : '3em',
-        width : '8em'
-    }
+    // const buttonstyle = {
+    //     backgroundColor : 'red',
+    //     color : 'white',
+    //     border : '1px solid black',
+    //     borderRadius : '5px',
+    //     margin : '10em',
+    //     height : '3em',
+    //     width : '8em'
+    // }
 
     return (
-        
-        <div >
-            닉네임을 입력해주세요
-            <form onSubmit={onSubmitHandler}>
-                <input 
-                type="text"
-                value={nickname}
-                placeholder="닉네임을 입력해주세요" onChange={onChangeHandler}
-                style={inputstyle}/>
-                <br/>
-                <button onClick={() => {
-                }} style={buttonstyle}> 게임 시작</button>
+        <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        <div className="w-[390px] h-[874px] bg-white rounded-lg shadow-lg flex flex-col justify-center items-center">
+        <div className="flex flex-col h-full p-4 w-full">
+            <form onSubmit={onSubmitHandler} className="flex flex-col justify-center items-center w-full h-full">
+                <div className="pt-20 pb-6 text-center">
+                    <h1 className="text-xl font-bold">닉네임을 입력해주세요</h1>
+                </div>
+                <div className="pb-20 mb-20 w-full flex justify-center">
+                    <input
+                        className="outline outline-offset-2 
+                        outline-black-500/50 w-3/4 
+                        px-4 py-2 rounded-md
+                        text-lg placeholder:text-center"
+                        type="text"
+                        value={nickname}
+                        placeholder="닉네임을 입력해주세요"
+                        onChange={onChangeHandler}
+                    />
+                </div>
+                <div
+                    className="flex justify-center items-center mt-20 
+                    outline outline-offset-2 outline-red-500 hover:bg-red-500 
+                    :text-white transition-colors px-6 py-2 rounded-md cursor-pointer">
+                    <button
+                        className="text-lg font-semibold"
+                        size="md"
+                        type="button"
+                        onClick={onSubmitHandler}>
+                        게임 시작
+                    </button>
+                </div>
             </form>
         </div>
+    </div>
+</div>
     );}
 
 export default MyInput
