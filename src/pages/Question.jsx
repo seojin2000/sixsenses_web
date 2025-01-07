@@ -66,16 +66,17 @@ function Qustion() {
     // 문제 카운팅
     count+=1;
     console.log("문제 개수 확인 : "+count);
-    if (count===10) {
-      navigate('/Rank',{state:{nickname,correctAnswers}});
-      console.log("전송", nickname,correctAnswers);
-    }
-    
+  
   }
 
   function onSubmitHandler2(evt) {
     evt.preventDefault();
     onRandomHandler();
+    // 10회가 되었을때는 랭킹페이지로 전달
+    if (count===10) {
+      navigate('/Rank',{state:{nickname,correctAnswers}});
+      console.log("전송", nickname,correctAnswers);
+    }
   }
 
   // 입력폼 핸들러 
@@ -88,9 +89,11 @@ function Qustion() {
   function onRandomHandler(evt) {
     // 중복여부 체크 진행 코드 만들기(해결완료)
     let Randomidx;
+    // 리스트.incldues 사용하면 안에 있는 데이터 확인
     do{
       Randomidx = parseInt(Math.random()*alldata.length); 
     } while(duplicateCheck.includes(Randomidx))
+    // duplicateCheck에 중복 인덱스 삽입
     duplicateCheck.push(Randomidx);
     let ranVal = alldata[Randomidx];
     console.log("중복배열 : ",duplicateCheck)
@@ -98,29 +101,18 @@ function Qustion() {
     setChecked(0);
   }
   
+  // 메모이제이션 초기 세팅
   useMemo(() => {
-    console.log('메모이제이션 최초 세팅-데이터')
+    // 전역값을 초기화 하지 않으면 랭킹페이지 이후 뒤로가기 클릭시 데이터가 남아있는 상태가 됨
+    // 그래서 전역변수랑 리스트 초기화 진행
+    count = 0;
+    correctAnswers = 0;
+    duplicateCheck = [];
     getAllProducts()
     .then(data =>{
       setAlldata(data);
     });    
   },[]); 
-
-
-  /**
-   * 메모이제이션에서 데이터를 늦게 가져오게 되어 useEffect에서 데이터를 랜덤으로 지정하는 단계에서 에러가 발생
-   * 
-   */
-
-  // useEffect( ()=>{
-  //   // setTimeout(() => console.log('Initial timeout!'), 1000);
-  //   console.log("랜덤 선택");
-  //   const Randomidx = parseInt(Math.random()*IDIOM_LENGTH);
-  //   let ranVal = alldata[Randomidx];
-  //   console.log(ranVal,alldata);
-  //   // setQuestion([ranVal.meaning,ranVal.answer])
-  //   // console.log("선택된 값 :",question );
-  // },[]);
 
   
   // 조건부 렌더링 방식으로 처리
