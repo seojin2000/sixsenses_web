@@ -52,7 +52,7 @@ function MyInput() {
         <div className="flex flex-col h-full p-4 w-full">
             <form onSubmit={onSubmitHandler} className="flex flex-col justify-center items-center w-full h-full">
                 <div>
-                    <h1 className="text-4xl font-bold">사자성어 퀴즈</h1>
+                    <h1 className="text-4xl font-bold">사자성어 퀴즈!</h1>
                 </div>
                 <div className="pt-20 pb-6 text-center">
                     <h1 className="text-xl font-bold">이름(별명)을 입력해주세요</h1>
