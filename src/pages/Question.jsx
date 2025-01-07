@@ -158,9 +158,13 @@ function Qustion() {
   }
 
   return (
-    <div >
-      <p> {question.mean}</p>
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        <div className="w-[390px] h-[874px] mx-auto bg-white relative flex flex-col justify-center items-center">
+        <div className="flex flex-col h-full p-4 w-full">
+      <p className="flex flex-col justify-center items-center w-full h-full"> {question.mean}</p>
       {formChange()}
+    </div>
+    </div>
     </div>
   );
 }

@@ -64,32 +64,41 @@ function MyInput() {
     // }
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-yellow-100">
-            <div className="w-[390px] h-[874px] mx-auto bg-white relative ">
-            <div className="flex flex-col h-full p-4">
-
-            <div className="pt-20 pb-6 "> 
-                <h1>닉네임을 입력해주세요</h1>
-                <form onSubmit={onSubmitHandler}>
-                    <input 
-                    className='outline outline-offset-2 outline-yellow-500/50'
-                    type="text"
-                    value={nickname}
-                    placeholder="닉네임을 입력해주세요" onChange={onChangeHandler}
+        <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        <div className="w-[390px] h-[874px] mx-auto bg-white relative flex flex-col justify-center items-center">
+        <div className="flex flex-col h-full p-4 w-full">
+            <form onSubmit={onSubmitHandler} className="flex flex-col justify-center items-center w-full h-full">
+                <div className="pt-20 pb-6 text-center">
+                    <h1 className="text-xl font-bold">닉네임을 입력해주세요</h1>
+                </div>
+                <div className="pb-20 mb-20 w-full flex justify-center">
+                    <input
+                        className="outline outline-offset-2 
+                        outline-black-500/50 w-3/4 
+                        px-4 py-2 rounded-md
+                        text-lg placeholder:text-center"
+                        type="text"
+                        value={nickname}
+                        placeholder="닉네임을 입력해주세요"
+                        onChange={onChangeHandler}
                     />
-                    
-                    <div className="mt-20 outline outline-offset-2 outline-yellow-500/50 
-                                hover:bg-yellow-500 transition-colors ">
-                    <button onClick={() => {
-                    }} > 게임 시작</button>
-                    </div>
+                </div>
+                <div
+                    className="flex justify-center items-center mt-20 
+                    outline outline-offset-2 outline-red-500 hover:bg-red-500 
+                    :text-white transition-colors px-6 py-2 rounded-md cursor-pointer">
+                    <button
+                        className="text-lg font-semibold"
+                        size="md"
+                        type="button"
+                        onClick={onSubmitHandler}>
+                        게임 시작
+                    </button>
+                </div>
             </form>
-            </div>
-
-           
-            </div>
-            </div>
         </div>
+    </div>
+</div>
     );}
 
 export default MyInput
