@@ -45,26 +45,9 @@ function MyInput() {
         setnickname("");
     }
 
-    // const inputstyle = {
-    //     border : '1px solid black',
-    //     borderRadius : '5px',
-    //     height : '3em',
-    //     width : '30em',
-    //     textAlign : 'center'
-    // }
-    
-    // const buttonstyle = {
-    //     backgroundColor : 'red',
-    //     color : 'white',
-    //     border : '1px solid black',
-    //     borderRadius : '5px',
-    //     margin : '10em',
-    //     height : '3em',
-    //     width : '8em'
-    // }
-
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        // TailWindStyle CSS를 사용하여 폼 구축진행
+        <div className="flex justify-center items-center min-h-screen bg-gray-100 overflow-hidden">
         <div className="w-[390px] h-[874px] bg-white rounded-lg shadow-lg flex flex-col justify-center items-center">
         <div className="flex flex-col h-full p-4 w-full">
             <form onSubmit={onSubmitHandler} className="flex flex-col justify-center items-center w-full h-full">
@@ -83,8 +66,7 @@ function MyInput() {
                         onChange={onChangeHandler}
                     />
                 </div>
-                <div
-                    className="flex justify-center items-center mt-20 
+                <div className="flex justify-center items-center mt-20 
                     outline outline-offset-2 outline-red-500 hover:bg-red-500 
                     :text-white transition-colors px-6 py-2 rounded-md cursor-pointer">
                     <button
@@ -97,8 +79,8 @@ function MyInput() {
                 </div>
             </form>
         </div>
-    </div>
-</div>
+        </div>
+        </div>
     );}
 
 export default MyInput
