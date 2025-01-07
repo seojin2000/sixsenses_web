@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import userData from '../data/users.json';
 import '../TailWindStyle.css';
-
+import { useLocation } from 'react-router-dom';
 
 const Rank = () => {
   const [isToggled, setIsToggled] = useState(false);
-  const name = '홍길동';
-  
+  const location = useLocation();
+  const nickname = location.state?.nickname;  // state에서 nickname 가져오기, ?: ull 방지
+  const correctAnswers = location.state?.correctAnswers;  // correctAnswers 가져오기
+
   // 점수가 높은 순으로 정렬하고 상위 5명만 선택
   const topFiveUsers = userData.users
     .sort((a, b) => b.score - a.score)
@@ -19,7 +21,7 @@ const Rank = () => {
     const sortedUsers = userData.users.sort((a, b) => b.score - a.score);
     
     // name과 일치하는 사용자의 인덱스 찾기
-    const currentIndex = sortedUsers.findIndex(user => user.name === name);
+    const currentIndex = sortedUsers.findIndex(user => user.name === nickname);
     
     if (currentIndex === -1) {
       return (
@@ -40,7 +42,7 @@ const Rank = () => {
   const displayUsers = isToggled ? getSurroundingRankUsers() : topFiveUsers;
 
   // name과 일치하는 사용자 찾기
-  const currentUser = users.find(user => user.name === name) || users[0];
+  const currentUser = users.find(user => user.name === nickname) || users[0];
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -51,10 +53,10 @@ const Rank = () => {
         {/* 헤더 영역 */}
         <div className="pt-20 pb-6">
           <h1 className="text-center text-xl mb-2">
-            모두 {currentUser.score}개 맞췄습니다.
+            {nickname}님 총 {correctAnswers}개 맞췄습니다.
           </h1>
           <h2 className="text-center text-lg">
-            전체 {currentUser.rank}등입니다
+            전체 {}등입니다
           </h2>
         </div>
 
@@ -64,7 +66,7 @@ const Rank = () => {
             <div key={user.id} className="flex justify-between py-3 border-b">
               <div className="flex">
                 <span className="mr-2">{index + 1}.</span>
-                <span className={user.name === name ? 'font-bold' : ''}>
+                <span className={user.name === nickname ? 'font-bold' : ''}>
                   {user.name}
                 </span>
               </div>
