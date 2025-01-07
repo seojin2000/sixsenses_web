@@ -8,7 +8,7 @@ function FlashScreen() {
     useEffect(() => {
         const timer = setTimeout(() => {
             navigate('/input');
-        }, 3000);
+        }, 1500);
 
         return () => clearTimeout(timer);
     }, [navigate]);
