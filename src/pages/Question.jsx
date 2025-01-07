@@ -116,29 +116,50 @@ function Qustion() {
   function formChange() {
     if (checked===0) { 
       return (
-        <form id='inputForm' onSubmit={onSubmitHandler}>
-          <br/>
-          <input 
-          type='text'
-          className='outline outline-offset-2 outline-blue-500/50'
-          value={answer}
-          onChange={onChangeHandler}/>
-          {/* 버튼 타입을 안하면 새로고침이 발생할수 있다. */}
-          <button 
-          className='outline outline-offset-2 outline-green-500/50'
-          type="button" onClick={onSubmitHandler} style={buttonStyle}> {'>'} </button>
-          </form>
+        <form id="inputForm" onSubmit={onSubmitHandler} className="flex flex-col justify-center items-center gap-4 w-full px-6">
+        <input
+            type="text"
+            className="outline outline-offset-2 
+                        outline-black-500/50 w-3/4 
+                        px-4 py-2 rounded-md
+                        text-lg placeholder:text-center"
+            value={answer}
+            placeholder="정답을 입력하세요"
+            onChange={onChangeHandler}/>
+          <div
+              className="flex justify-center items-center mt-20 
+              :text-white transition-colors px-6 py-2 rounded-md cursor-pointer">
+            <button
+                className="outline outline-offset-2 outline-green-500/50 
+                hover:bg-green-500 hover:text-white 
+                transition-colors px-4 py-1 rounded-md"
+                type="button"
+                onClick={onSubmitHandler}>
+                {'>'}
+            </button>
+            </div>
+    </form>
       );
     }
     else if (checked===1) {
       let showWord = question.word
       return (
-        <form>
-          {showWord}
-          <p>오답입니다</p>
-          <button 
-          className='outline outline-offset-2 outline-green-500/50'
-          type='button' onClick={onSubmitHandler2} style={buttonStyle}> {'다음 문제'}</button>
+        <form id="inputForm" className="flex flex-col justify-center items-center gap-4 w-full px-6">
+            <p className="text-red-500 font-semibold">오답!</p>
+            <p className="px-4 py-2 rounded-md text-x1 ">{showWord}</p>
+            
+
+            <div className="flex justify-center items-center w-full mt-20">
+                <button
+                    className="outline outline-offset-2 outline-green-500/50 
+                        hover:bg-green-500 hover:text-white 
+                        transition-colors px-4 py-0 rounded-md"
+                    type="button"
+                    onClick={onSubmitHandler2}
+                    style={buttonStyle}>
+                    {'다음 문제'}
+                </button>
+            </div>
         </form>
       );
     }
@@ -146,24 +167,35 @@ function Qustion() {
       let showWord = question.word
       console.log(showWord);
       return (
-        <form>
-          {showWord}
-          <p>정답입니다</p>
-          <button 
-          className='outline outline-offset-2 outline-green-500/50'
-          type='button' onClick={onSubmitHandler2} style={buttonStyle}> {'다음 문제'}</button>
-      </form>
+        <form id="inputForm" className="flex flex-col justify-center items-center gap-4 w-full px-6">
+            <p className="text-blue-500 font-semibold">정답!</p>
+            <p className="px-4 py-2 rounded-md text-x1">{showWord}</p>
+            
+
+            <div className="flex justify-center items-center w-full mt-20">
+                <button
+                    className="outline outline-offset-2 outline-green-500/50 
+                        hover:bg-green-500 hover:text-white 
+                        transition-colors px-4 py-0 rounded-md"
+                    type="button"
+                    onClick={onSubmitHandler2}
+                    style={buttonStyle}>
+                    {'다음 문제'}
+                </button>
+            </div>
+        </form>
     );
     }
   }
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
-        <div className="w-[390px] h-[874px] mx-auto bg-white relative flex flex-col justify-center items-center">
-        <div className="flex flex-col h-full p-4 w-full">
-      <p className="flex flex-col justify-center items-center w-full h-full"> {question.mean}</p>
+    <div className="w-[390px] h-[874px] bg-white rounded-lg shadow-lg flex flex-col justify-center items-center">
+        <div className="pb-6 text-center">
+            <p className="text-xl font-bold">{question.mean}</p>
+        </div>
+      
       {formChange()}
-    </div>
     </div>
     </div>
   );
