@@ -5,6 +5,7 @@
 import {useNavigate} from 'react-router-dom'
 import React from "react";
 import '../TailWindStyle.css';
+import userData from '../data/users.json';
 
 import axios from "axios"; //API 호출
 
@@ -25,6 +26,12 @@ function MyInput() {
         setnickname(ori_text)
 
     }
+
+    const topFiveUsers = userData.users
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 5);
+    
+    console.log(topFiveUsers)
     // 제출했을 때 반응하는 핸들러
     function onSubmitHandler(evt) {
         evt.preventDefault();
@@ -71,7 +78,7 @@ function MyInput() {
                 <div className="pt-20 pb-6 text-center">
                     <h1 className="text-xl font-bold">이름(별명)을 입력해주세요</h1>
                 </div>
-                <div className="pb-20 mb-20 w-full flex justify-center">
+                <div className="pb-20 w-full flex justify-center">
                     <input
                         className="outline outline-offset-2 
                         outline-black-500/50 w-3/4 
@@ -83,7 +90,7 @@ function MyInput() {
                         onChange={onChangeHandler}
                     />
                 </div>
-                <div className="flex justify-center items-center mt-20 
+                <div className="flex justify-center items-center mb-8
                     outline outline-offset-2 outline-red-500 hover:bg-red-500 
                     :text-white transition-colors px-6 py-2 rounded-md cursor-pointer">
                     <button
@@ -93,6 +100,22 @@ function MyInput() {
                         onClick={onSubmitHandler}>
                         게임 시작
                     </button>
+                </div>
+
+                
+                <div className='mt-10 px-10'>
+                    <p className="font-bold text-2xl mb-10">전체랭킹</p>
+                    {topFiveUsers.map((user, index) => (
+                    <div key={user.id} className="flex justify-between py-2 border-b">
+                        <div className="flex">
+                        <span className="mr-2">{index + 1}.</span>
+                        <span className={user.name === nickname ? 'font-bold' : ''}>
+                            {user.name}
+                        </span>
+                        </div>
+                        <span>{user.score}개</span>
+                    </div>
+                    ))}
                 </div>
             </form>
         </div>
