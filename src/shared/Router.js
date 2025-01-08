@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MyInput from "../pages/MyInput";
 import Question from '../pages/Question';
 import Rank from '../pages/Rank';

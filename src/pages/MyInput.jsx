@@ -5,7 +5,9 @@
 import {useNavigate} from 'react-router-dom'
 import React from "react";
 import '../TailWindStyle.css';
+import userData from '../data/users.json';
 
+import axios from "axios"; //API 호출
 
 import {  
     useState,       // 상태변수 -> 화면갱신
@@ -24,25 +26,44 @@ function MyInput() {
         setnickname(ori_text)
 
     }
+
+    const topFiveUsers = userData.users
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 5);
+    
+    console.log(topFiveUsers)
     // 제출했을 때 반응하는 핸들러
     function onSubmitHandler(evt) {
         evt.preventDefault();
-        // 공백 체크 
-        if (nickname.length===0) {
-            alert("닉네임을 입력해주세요")
+
+        if (nickname.trim().length === 0) {
+            alert("닉네임을 입력해주세요");
+            return;
         }
-        // 중복 체크
-        //TODO 1.추후에 유효성 체크
-        else if (nickname==='김강빈') {
-            // 추후에 유효성 검사
-            alert("다른 닉네임으로 입력해주세요")
-        }
-        // navigate를 사용하여 다음페이지 전달
-        else {
-            navigate('/Qustion',{state:{nickname}});
-            console.log("전송", nickname);
-        }
-        setnickname("");
+
+        // 1. 닉네임 중복 확인 API 호출
+        axios.get(`http://localhost:8080/auth/check-nickname`, { params: { nickname } })
+            .then((response) => {
+                // 2. 닉네임 중복 여부 처리
+                if (!response.data) {
+                    // 닉네임 중복 없음 -> 로그인 요청
+                    axios.post(`http://localhost:8080/auth/login`, null, { params: { nickname } })
+                        .then((loginResponse) => {
+                            alert(loginResponse.data); // 로그인 성공 메시지 출력
+                            navigate('/Qustion', { state: { nickname } }); // 성공 시 다음 페이지로 이동
+                        })
+                        .catch((loginError) => {
+                            console.error(loginError);
+                            alert("로그인 중 문제가 발생했습니다.");
+                        });
+                } else {
+                    alert("이미 사용 중인 닉네임입니다. 다른 닉네임을 입력해주세요.");
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+                alert("중복 확인 중 문제가 발생했습니다.");
+            });
     }
 
     return (
@@ -57,7 +78,7 @@ function MyInput() {
                 <div className="pt-20 pb-6 text-center">
                     <h1 className="text-xl font-bold">이름(별명)을 입력해주세요</h1>
                 </div>
-                <div className="pb-20 mb-20 w-full flex justify-center">
+                <div className="pb-20 w-full flex justify-center">
                     <input
                         className="outline outline-offset-2 
                         outline-black-500/50 w-3/4 
@@ -69,7 +90,7 @@ function MyInput() {
                         onChange={onChangeHandler}
                     />
                 </div>
-                <div className="flex justify-center items-center mt-20 
+                <div className="flex justify-center items-center mb-8
                     outline outline-offset-2 outline-red-500 hover:bg-red-500 
                     :text-white transition-colors px-6 py-2 rounded-md cursor-pointer">
                     <button
@@ -79,6 +100,22 @@ function MyInput() {
                         onClick={onSubmitHandler}>
                         게임 시작
                     </button>
+                </div>
+
+                
+                <div className='mt-10 px-10'>
+                    <p className="font-bold text-2xl mb-10">전체랭킹</p>
+                    {topFiveUsers.map((user, index) => (
+                    <div key={user.id} className="flex justify-between py-2 border-b">
+                        <div className="flex">
+                        <span className="mr-2">{index + 1}.</span>
+                        <span className={user.name === nickname ? 'font-bold' : ''}>
+                            {user.name}
+                        </span>
+                        </div>
+                        <span>{user.score}개</span>
+                    </div>
+                    ))}
                 </div>
             </form>
         </div>
