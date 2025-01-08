@@ -42,18 +42,19 @@ const Rank = () => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="w-96 h-[844px] bg-white rounded-lg shadow-lg relative">
+
         {/* 토글 스위치 */}
         <div className="absolute top-4 right-4 flex items-center">
-          <span className="text-sm mr-2">
-            {isToggled ? '전체 등수보기' : '내 등수 보기'}
-          </span>
+          <span className="text-sm mr-2">내 등수 보기</span>
           <div
-            className="w-12 h-6 bg-gray-300 rounded-full p-1 cursor-pointer transition-colors duration-300"
+            className={`w-12 h-6 rounded-full p-1 cursor-pointer transition-colors duration-300 ${
+              isToggled ? "bg-green-500" : "bg-gray-300"
+            }`}
             onClick={() => setIsToggled(!isToggled)}
           >
             <div
               className={`w-4 h-4 bg-white rounded-full shadow transition-transform duration-300 ${
-                isToggled ? 'translate-x-6' : 'translate-x-0'
+                isToggled ? "translate-x-6" : "translate-x-0"
               }`}
             ></div>
           </div>
@@ -65,9 +66,7 @@ const Rank = () => {
             <h1 className="text-center text-xl mb-2">
               {nickname}님 총 {correctAnswers}개 맞췄습니다.
             </h1>
-            <h2 className="text-center text-lg">
-              전체 {currentRank}등입니다
-            </h2>
+            <h2 className="text-center text-lg">전체 {currentRank}등입니다</h2>
           </div>
 
           {/* 리스트 영역 */}
@@ -76,7 +75,7 @@ const Rank = () => {
               <div key={user.id} className="flex justify-between py-3 border-b">
                 <div className="flex">
                   <span className="mr-2">{index + 1}.</span>
-                  <span className={user.name === nickname ? 'font-bold' : ''}>
+                  <span className={user.name === nickname ? "font-bold" : ""}>
                     {user.name}
                   </span>
                 </div>
@@ -89,7 +88,7 @@ const Rank = () => {
           <div className="py-6">
             <button
               className="w-full bg-yellow-300 py-3 rounded-md hover:bg-yellow-400 transition-colors"
-              onClick={() => navigate('/')}
+              onClick={() => navigate("/")}
             >
               재도전
             </button>
