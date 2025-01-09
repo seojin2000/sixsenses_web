@@ -60,7 +60,9 @@ function Question() {
   }, []);
 
   // (2) 정답 체크
-  const onCheckAnswer = () => {
+  const onCheckAnswer = (evt) => {
+    evt.preventDefault();
+
     if (!answer.trim()) {
       alert("정답을 입력해주세요");
       return;
@@ -75,7 +77,8 @@ function Question() {
   };
 
   // (3) 다음 문제 or 랭킹 이동
-  const onNextQuestion = () => {
+  const onNextQuestion = (evt) => {
+    evt.preventDefault();
       if (count >= 9) {
           // 10문제 풀면 점수를 저장하고 랭킹 페이지로 이동
           saveQuizResult(nickname, correctAnswers); // 마지막 문제 후 결과 저장
@@ -121,7 +124,7 @@ function Question() {
     if (checked === 0) {
       // 정답 입력 전
       return (
-        <div className="flex flex-col items-center gap-4 w-full px-6">
+        <form id="inputForm" onSubmit={onCheckAnswer}  className="flex flex-col items-center gap-4 w-full px-6">
           <input
             type="text"
             className="outline outline-offset-2 outline-black-500/50 w-3/4 px-4 py-2 rounded-md text-lg placeholder:text-center"
@@ -132,11 +135,10 @@ function Question() {
           <button
             type="button"
             className="outline outline-offset-2 outline-green-500/50 hover:bg-green-500 hover:text-white transition-colors px-4 py-1 rounded-md"
-            onClick={onCheckAnswer}
-          >
+            onClick={onCheckAnswer}>
             <AiFillCaretRight />
           </button>
-        </div>
+        </form>
       );
     } else if (checked === 1) {
       // 오답
@@ -144,7 +146,7 @@ function Question() {
         <div className="flex flex-col items-center gap-4 w-full px-6">
           <p className="text-red-500 font-semibold">오답입니다</p>
           <p>{question.word} ({question.hanja})</p>
-          <p className="text-gray-500 text-sm">{question.meaning}</p>
+          {/* <p className="text-gray-500 text-sm">{question.meaning}</p> */}
           <button
             className="outline outline-offset-2 outline-green-500/50 hover:bg-green-500 hover:text-white transition-colors px-4 py-1 rounded-md"
             onClick={onNextQuestion}
