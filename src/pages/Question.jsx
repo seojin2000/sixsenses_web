@@ -173,12 +173,16 @@ function Question() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="w-[390px] h-[874px] bg-white rounded-lg shadow-lg flex flex-col justify-center items-center p-4">
-        <div className="pb-6 text-center">
-          <p className="text-xl font-bold">{question.meaning}</p>
+    <div className="flex items-center min-h-screen bg-gray-100">
+      <div className="w-[390px] h-[874px] bg-white rounded-lg shadow-lg flex flex-col justify-start items-center px-4">
+      <div className="w-full text-center pt-2">
+      <p className="text-lg font-semibold">문제 {count + 1}/10</p>
+    </div>
+        <div className="text-center absolute bottom-1/2 p-4">
+          <p className="text-xl font-bold pb-5">{question.meaning}</p>
+          {renderForm()}
         </div>
-        {renderForm()}
+        
       </div>
     </div>
   );
