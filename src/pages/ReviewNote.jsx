@@ -8,9 +8,7 @@ const ReviewNote = () => {
   console.log('현재 incorrect 값:', incorrects);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 via-white to-blue-50">
-      <div className="w-[390px] h-[874px] bg-white rounded-lg shadow-2xl flex flex-col p-6">
-        {/* 헤더 섹션 */}
+        <div>
         <div className="mb-8 text-center">
           <div className="flex items-center justify-center mb-4">
             <Book className="w-8 h-8 text-indigo-600 mr-2" />
@@ -19,7 +17,6 @@ const ReviewNote = () => {
           <p className="text-gray-600">나만의 사자성어 학습 기록</p>
         </div>
 
-        {/* 스크롤 가능한 사자성어 목록 컨테이너 */}
         <div className="flex-1 overflow-y-auto">
           <div className="space-y-6">
             {incorrects.map(incorrect => (
@@ -50,8 +47,7 @@ const ReviewNote = () => {
             ))}
           </div>
         </div>
-      </div>
-    </div>
+        </div>
   );
 };
 
