@@ -50,7 +50,7 @@ const Rank = () => {
   }
 
   return (
-      <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-100 via-white to-blue-50">
         <div className="w-96 h-[844px] bg-white rounded-lg shadow-lg relative">
           {/* 토글 스위치 */}
           <div className="absolute top-4 right-4 flex items-center">
