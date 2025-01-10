@@ -46,10 +46,6 @@ const Rank = () => {
   // 토글 상태에 따라 표시할 사용자 목록 결정
   const displayUsers = isToggled ? getSurroundingUsers() : users;
 
-  const showIncorrect = () => {
-    alert('안녕');
-  }
-
   if (loading) {
     return <div>Loading...</div>; // 로딩 중 표시
   }
@@ -120,7 +116,7 @@ const Rank = () => {
               </button>
               <button
                 className="flex-1 bg-yellow-300 py-3 rounded-md hover:bg-yellow-400 transition-colors"
-                onClick={showIncorrect}
+                onClick={() => navigate('/Review', { state: { incorrect: incorrect} })}
               >
                 오답노트
               </button>

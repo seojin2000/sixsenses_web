@@ -4,6 +4,7 @@ import MyInput from "../pages/MyInput";
 import Question from '../pages/Question';
 import Rank from '../pages/Rank';
 import FlashScreen from "../pages/FlashScreen";
+import ReviewNote from "../pages/ReviewNote";
 
 const Router = () => {
     return (
@@ -13,6 +14,7 @@ const Router = () => {
                 <Route path="/input" element={<MyInput />} /> // 닉네임
                 <Route path="/Qustion" element={<Question />} /> // 문제를 푸는곳
                 <Route path="/Rank" element={<Rank />} /> // 랭킹 페이지
+                <Route path="/Review" element={<ReviewNote />} /> // 랭킹 페이지
             </Routes>
         </BrowserRouter>
     );

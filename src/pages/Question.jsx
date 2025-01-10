@@ -82,7 +82,7 @@ function Question() {
   // (3) 다음 문제 or 랭킹 이동
   const onNextQuestion = (evt) => {
     evt.preventDefault();
-      if (count >= 9) {
+      if (count >= 10) {
           // 10문제 풀면 점수를 저장하고 랭킹 페이지로 이동
           saveQuizResult(nickname, correctAnswers); // 마지막 문제 후 결과 저장
           axios
@@ -186,16 +186,19 @@ function Question() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 via-white to-blue-50">
-    <div className="w-[390px] h-auto bg-white rounded-lg shadow-2xl flex flex-col items-center p-6">
-      {/* 문제 정보 */}
-      <div className="w-full text-center py-2">
-        <p className="text-lg font-semibold text-gray-600">문제 {count + 1}/10</p>
-      </div>
-      <div className="text-center my-10">
-      <p className="text-2xl font-bold text-gray-800 pb-5">{question.meaning}</p>
+      <div className="w-[390px] h-auto bg-white rounded-lg shadow-2xl flex flex-col items-center p-6">
+        {/* 문제 정보 */}
+        <div className="w-full text-center py-2">
+          <p className="text-lg font-semibold text-gray-600">
+            문제 {count + 1}/10
+          </p>
+        </div>
+        <div className="text-center my-10">
+          <p className="text-2xl font-bold text-gray-800 pb-5">
+            {question.meaning}
+          </p>
           {renderForm()}
         </div>
-        
       </div>
     </div>
   );
