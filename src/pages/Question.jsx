@@ -22,7 +22,7 @@ function Question() {
   const [count, setCount] = useState(0);     // 풀 문제수
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [incorrect, setIncorrect] = useState([])
-
+  
 
   // (1) DB에서 랜덤 사자성어 불러오기
   const loadRandomIdiom = () => {
@@ -76,34 +76,33 @@ function Question() {
       setChecked(1); // 오답
       setIncorrect([...incorrect, question]);
     }
-    setCount(prev => prev + 1);
+    
   };
 
   // (3) 다음 문제 or 랭킹 이동
   const onNextQuestion = (evt) => {
     evt.preventDefault();
-      if (count >= 9) {
-          // 10문제 풀면 점수를 저장하고 랭킹 페이지로 이동
-          saveQuizResult(nickname, correctAnswers); // 마지막 문제 후 결과 저장
-          axios
-              .post("http://localhost:8080/api/users/updateScore", null, {
-                  params: {
-                      nickname: nickname,
-                      score: correctAnswers, // 맞힌 문제 수,
-                      
-                  },
-              })
-              .then((response) => {
-                  console.log(response.data);
-                  navigate("/Rank", { state: { nickname, correctAnswers,incorrect } });
-              })
-              .catch((err) => {
-                  console.error("점수 저장 실패:", err);
-                  navigate("/Rank", { state: { nickname, correctAnswers,incorrect } });
-              });
-      } else {
-          loadRandomIdiom();
-      }
+    if (count >= 9) {
+        // 10문제 풀면 점수를 저장하고 랭킹 페이지로 이동
+        saveQuizResult(nickname, correctAnswers); // 마지막 문제 후 결과 저장
+        axios
+            .post("http://localhost:8080/api/users/updateScore", null, {
+                params: {
+                    nickname: nickname,
+                    score: correctAnswers, // 맞힌 문제 수,
+                    
+                },
+            })
+            .then((response) => {
+                console.log(response.data);
+                navigate("/Rank", { state: { nickname, correctAnswers,incorrect } });
+            })
+            .catch((err) => {
+                console.error("점수 저장 실패:", err);
+                navigate("/Rank", { state: { nickname, correctAnswers,incorrect } });
+            });
+    } else loadRandomIdiom();
+    setCount(prev => prev + 1);
   };
 
   // (3-1) 퀴즈 끝난 후 정보를 Quiz_result에도 저장
