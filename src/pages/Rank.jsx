@@ -50,67 +50,80 @@ const Rank = () => {
   }
 
   return (
-      <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-100 via-white to-blue-50">
-        <div className="w-96 h-[844px] bg-white rounded-lg shadow-lg relative">
-          {/* 토글 스위치 */}
-          <div className="absolute top-4 right-4 flex items-center">
-            <span className="text-sm mr-2">내 등수 기준 보기</span>
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-100 via-white to-blue-50">
+      <div className="w-96 h-[844px] bg-white rounded-lg shadow-lg relative">
+        {/* 토글 스위치 */}
+        <div className="absolute top-4 right-4 flex items-center">
+          <span className="text-sm mr-2">내 등수 기준 보기</span>
+          <div
+            className={`w-12 h-6 rounded-full p-1 cursor-pointer transition-colors duration-300 ${
+              isToggled ? "bg-green-500" : "bg-gray-300"
+            }`}
+            onClick={() => setIsToggled(!isToggled)}
+          >
             <div
-                className={`w-12 h-6 rounded-full p-1 cursor-pointer transition-colors duration-300 ${
-                    isToggled ? "bg-green-500" : "bg-gray-300"
-                }`}
-                onClick={() => setIsToggled(!isToggled)}
-            >
-              <div
-                  className={`w-4 h-4 bg-white rounded-full shadow transition-transform duration-300 ${
-                      isToggled ? "translate-x-6" : "translate-x-0"
-                  }`}
-              ></div>
-            </div>
+              className={`w-4 h-4 bg-white rounded-full shadow transition-transform duration-300 ${
+                isToggled ? "translate-x-6" : "translate-x-0"
+              }`}
+            ></div>
+          </div>
+        </div>
+
+        <div className="flex flex-col h-full p-4">
+          {/* 본인 정보 */}
+          <div className="pt-16 pb-6">
+            <h1 className="text-center text-xl mb-2">
+              {nickname}님 총 {correctAnswers}개 맞췄습니다.
+            </h1>
+            <h2 className="text-center text-lg">
+              전체{" "}
+              {currentRank > 0 ? currentRank : "등수를 계산할 수 없습니다."}
+              등입니다
+            </h2>
           </div>
 
-          <div className="flex flex-col h-full p-4">
-            {/* 본인 정보 */}
-            <div className="pt-16 pb-6">
-              <h1 className="text-center text-xl mb-2">
-                {nickname}님 총 {correctAnswers}개 맞췄습니다.
-              </h1>
-              <h2 className="text-center text-lg">
-                전체 {currentRank > 0 ? currentRank : "등수를 계산할 수 없습니다."}등입니다
-              </h2>
-            </div>
-
-            {/* 사용자 랭킹 리스트 */}
-            <div className="flex-1 overflow-y-auto">
-              {displayUsers.map((user, index) => (
-                  <div key={user.id} className="flex justify-between py-3 border-b">
-                    <div className="flex">
+          {/* 사용자 랭킹 리스트 */}
+          <div className="flex-1 overflow-y-auto">
+            {displayUsers.map((user, index) => (
+              <div key={user.id} className="flex justify-between py-3 border-b">
+                <div className="flex">
                   <span className="mr-2">
                     {isToggled
-                        ? users.findIndex(u => u.id === user.id) + 1 // 실제 등수 표시
-                        : index + 1}.
+                      ? users.findIndex((u) => u.id === user.id) + 1 // 실제 등수 표시
+                      : index + 1}
+                    .
                   </span>
-                      <span className={user.nickname === nickname ? "font-bold" : ""}>
+                  <span
+                    className={user.nickname === nickname ? "font-bold" : ""}
+                  >
                     {user.nickname}
                   </span>
-                    </div>
-                    <span>{user.score}개</span>
-                  </div>
-              ))}
-            </div>
+                </div>
+                <span>{user.score}개</span>
+              </div>
+            ))}
+          </div>
 
-            {/* 재도전 버튼 */}
-            <div className="py-6">
+          {/* 재도전 버튼 */}
+          <div className="py-6">
+            <div className="flex gap-4">
               <button
-                  className="w-full bg-yellow-300 py-3 rounded-md hover:bg-yellow-400 transition-colors"
-                  onClick={() => navigate("/")}
+                className="flex-1 bg-yellow-300 py-3 rounded-md hover:bg-yellow-400 transition-colors"
+                onClick={() => navigate("/")}
               >
                 재도전
+              </button>
+              <button
+                className="flex-1 bg-yellow-300 py-3 rounded-md hover:bg-yellow-400 transition-colors"
+                //onClick={() => navigate("/")}
+              >
+                오답노트
               </button>
             </div>
           </div>
         </div>
       </div>
+    </div>
   );
 };
 
