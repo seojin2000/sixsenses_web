@@ -1,12 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Modal from "react-modal";
+
+function getIncorrect(incorrect) {
+  return incorrect.map((incor,idx) => {
+      const {word,meaning} = incor
+      return (
+          <tr key={idx} className="even:bg-gray-50">
+              <th className="border border-gray-300" >{word}</th>
+              <th className="border border-gray-300">{meaning}</th>
+          </tr>
+      );
+  });
+}
 
 const Rank = () => {
   const [isToggled, setIsToggled] = useState(false); // 토글 상태
   const [users, setUsers] = useState([]); // 전체 사용자 데이터
   const [loading, setLoading] = useState(true); // 로딩 상태
   const [currentRank, setCurrentRank] = useState(0); // 현재 사용자 등수
+  const [isOpen, setIsOpen] = useState(false); // 모달창
+  const [incorrectdata,setIncorrectData] = useState("")
+
+
   const location = useLocation();
   const navigate = useNavigate();
   const nickname = location.state?.nickname; // 현재 사용자 닉네임
@@ -19,7 +36,7 @@ const Rank = () => {
       try {
         // 전체 사용자 데이터 가져오기
         const usersResponse = await axios.get('http://localhost:8080/api/users/rankings');
-        setUsers(usersResponse.data);
+        setUsers(usersResponse.data.slice(0, 10)); // 상위 10명만 가져오기
 
         // 본인 등수 가져오기
         const rankResponse = await axios.get(`http://localhost:8080/api/users/rank?nickname=${nickname}`);
@@ -46,9 +63,33 @@ const Rank = () => {
   // 토글 상태에 따라 표시할 사용자 목록 결정
   const displayUsers = isToggled ? getSurroundingUsers() : users;
 
-  const showIncorrect = () => {
-    alert('안녕');
-  }
+  const openModal = () => {
+    setIsOpen(true);
+  };
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  const customStyles = {
+    overlay : {
+      backgroundColor:'rgba(0,0,0,0.5)',
+    },
+    content : {
+      width :"384px",
+      height :"500px",
+      margin:"auto",
+      borderRadius:"4px",
+      boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
+      padding:'20px',
+    }
+  };
+
+  useMemo(() => {
+    let data = getIncorrect(incorrect) 
+    setIncorrectData(data);
+  },[]);
+  
+
 
   if (loading) {
     return <div>Loading...</div>; // 로딩 중 표시
@@ -118,12 +159,41 @@ const Rank = () => {
               >
                 재도전
               </button>
-              <button
+              {/* <button
                 className="flex-1 bg-yellow-300 py-3 rounded-md hover:bg-yellow-400 transition-colors"
                 onClick={showIncorrect}
               >
                 오답노트
-              </button>
+              </button> */}
+              <button 
+              className="flex-1 bg-yellow-300 py-3 rounded-md hover:bg-yellow-400 transition-colors"
+              onClick={openModal}>오답노트</button>
+              <Modal isOpen={isOpen} onRequestClose={closeModal} style={customStyles}>
+                <div className="flex flex-col h-full">
+                <div className="w-full border-collapse border border-gray-300">
+                <table className="w-full border-collapse border border-gray-300">
+                  <thead className="bg-gray-100">
+                    <tr>
+                      <th className="border border-gray-300 w-1/3">사자성어</th>
+                      <th className="border border-gray-300 text-center">의미</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {incorrectdata}
+                  </tbody>
+                </table>
+                </div>
+                <div className="mt-auto">
+                <button
+                  onClick={closeModal}
+                  className="w-full bg-yellow-300 py-3 rounded-md hover:bg-yellow-400 transition-colors mt-4 mb-4"
+                >
+                  닫기
+                </button>
+                </div>
+                </div>
+              </Modal>
+
             </div>
           </div>
         </div>
