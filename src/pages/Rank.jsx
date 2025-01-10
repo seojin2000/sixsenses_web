@@ -36,7 +36,7 @@ const Rank = () => {
       try {
         // 전체 사용자 데이터 가져오기
         const usersResponse = await axios.get('http://localhost:8080/api/users/rankings');
-        setUsers(usersResponse.data.slice(0, 10)); // 상위 10명만 가져오기
+        setUsers(usersResponse.data); // 상위 10명만 가져오기
 
         // 본인 등수 가져오기
         const rankResponse = await axios.get(`http://localhost:8080/api/users/rank?nickname=${nickname}`);
@@ -130,7 +130,7 @@ const Rank = () => {
 
           {/* 사용자 랭킹 리스트 */}
           <div className="flex-1 overflow-y-auto">
-            {displayUsers.map((user, index) => (
+            {displayUsers.slice(0,10).map((user, index) => (
               <div key={user.id} className="flex justify-between py-3 border-b">
                 <div className="flex">
                   <span className="mr-2">
@@ -186,8 +186,7 @@ const Rank = () => {
                 <div className="mt-auto">
                 <button
                   onClick={closeModal}
-                  className="w-full bg-yellow-300 py-3 rounded-md hover:bg-yellow-400 transition-colors mt-4 mb-4"
-                >
+                  className="w-full bg-yellow-300 py-3 rounded-md hover:bg-yellow-400 transition-colors mt-4 mb-4">
                   닫기
                 </button>
                 </div>
