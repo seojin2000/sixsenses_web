@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Modal from "react-modal";
+import Review from "./ReviewNote";
 
 function getIncorrect(incorrect) {
   return incorrect.map((incor,idx) => {
@@ -170,19 +171,7 @@ const Rank = () => {
               onClick={openModal}>오답노트</button>
               <Modal isOpen={isOpen} onRequestClose={closeModal} style={customStyles}>
                 <div className="flex flex-col h-full">
-                <div className="w-full border-collapse border border-gray-300">
-                <table className="w-full border-collapse border border-gray-300">
-                  <thead className="bg-gray-100">
-                    <tr>
-                      <th className="border border-gray-300 w-1/3">사자성어</th>
-                      <th className="border border-gray-300 text-center">의미</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {incorrectdata}
-                  </tbody>
-                </table>
-                </div>
+                <Review/>
                 <div className="mt-auto">
                 <button
                   onClick={closeModal}
