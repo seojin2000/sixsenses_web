@@ -109,7 +109,7 @@ const Rank = () => {
             <div className="flex gap-4">
               <button
                 className="flex-1 bg-yellow-300 py-3 rounded-md hover:bg-yellow-400 transition-colors"
-                onClick={() => navigate("/")}
+                onClick={() => navigate('/Qustion', { state: { nickname } })}
               >
                 재도전
               </button>
