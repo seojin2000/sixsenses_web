@@ -2,7 +2,7 @@ import React from 'react';
 
 const FlashScreen = () => {
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 overflow-hidden">
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-100 via-white to-blue-50 overflow-hidden">
     <div className="w-[390px] h-[874px] bg-white rounded-lg shadow-xl flex flex-col justify-center items-center">
       {/* 헤더 섹션 */}
       <div className="bg-white text-white py-8 px-4 text-center">

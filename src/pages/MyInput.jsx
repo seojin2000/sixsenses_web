@@ -75,59 +75,60 @@ function MyInput() {
     }
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-100 overflow-hidden">
-        <div className="w-[390px] h-[874px] bg-white rounded-lg shadow-lg flex flex-col justify-center items-center">
-        <div className="flex flex-col h-full p-4 w-full">
-            <form onSubmit={onSubmitHandler} className="flex flex-col justify-center items-center w-full h-full">
-                <div>
-                    <h1 className="text-4xl font-bold">사자성어 퀴즈!</h1>
-                </div>
-                <div className="pt-20 pb-6 text-center">
-                    <h1 className="text-xl font-bold">이름(별명)을 입력해주세요</h1>
-                </div>
-                <div className="pb-20 w-full flex justify-center">
-                    <input
-                        className="outline outline-offset-2 
-                        outline-black-500/50 w-3/4 
-                        px-4 py-2 rounded-md
-                        text-lg placeholder:text-center"
-                        type="text"
-                        value={nickname}
-                        placeholder="이름(별명)을 입력해주세요"
-                        onChange={onChangeHandler}
-                    />
-                </div>
-                <div className="flex justify-center items-center mb-8
-                    outline outline-offset-2 outline-red-500 hover:bg-red-500 
-                    :text-white transition-colors px-6 py-2 rounded-md cursor-pointer">
-                    <button
-                        className="text-lg font-semibold"
-                        size="md"
-                                type="submit"
-                        onClick={onSubmitHandler}>
-                        게임 시작
-                    </button>
-                </div>
+        <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-100 via-white to-blue-50 overflow-hidden">
+  <div className="w-[390px] h-auto bg-white rounded-lg shadow-2xl flex flex-col items-center p-6">
+    {/* 헤더 섹션 */}
+    <div className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white text-center py-6 rounded-lg shadow-md">
+      <h1 className="text-3xl font-bold">사자성어 퀴즈</h1>
+      <p className="text-lg mt-1">당신의 한자 실력을 확인해보세요!</p>
+    </div>
 
-                        {/* 전체 랭킹 표시 */}
-                <div className='mt-10 px-10'>
-                            <p className="font-bold text-2xl mb-10">전체 랭킹</p>
-                            {users.slice(0, 5).map((user, index) => (
-                    <div key={user.id} className="flex justify-between py-2 border-b">
-                        <div className="flex">
-                        <span className="mr-2">{index + 1}.</span>
-                                        <span className={user.nickname === nickname ? 'font-bold' : ''}>
-                                            {user.nickname}
-                        </span>
-                        </div>
-                        <span>{user.score}개</span>
-                    </div>
-                    ))}
-                </div>
-            </form>
-        </div>
-        </div>
-        </div>
+    {/* 메인 콘텐츠 */}
+    <div className="w-full mt-6">
+      {/* 이름 입력 섹션 */}
+      <form onSubmit={onSubmitHandler} className="flex flex-col items-center space-y-6">
+        <h2 className="text-xl font-semibold text-slate-700">이름(별명)을 입력해주세요</h2>
+        <input
+          className="w-3/4 px-4 py-2 border border-gray-300 rounded-lg text-center text-lg placeholder-gray-400 focus:ring-2 focus:ring-blue-500 outline-none"
+          type="text"
+          value={nickname}
+          placeholder="이름(별명)을 입력해주세요"
+          onChange={onChangeHandler}
+        />
+        <button
+          type="submit"
+          className="w-3/4 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white text-lg font-semibold py-3 rounded-lg shadow-lg transition-all"
+        >
+          게임 시작
+        </button>
+      </form>
+    </div>
+
+    {/* 전체 랭킹 섹션 */}
+    <div className="w-full mt-10">
+      <h2 className="font-bold text-2xl text-center text-slate-700 mb-6">전체 랭킹</h2>
+      <div className="px-6 space-y-4">
+        {users.slice(0, 5).map((user, index) => (
+          <div
+            key={user.id}
+            className={`flex justify-between items-center py-3 px-4 rounded-lg shadow-md ${
+              user.nickname === nickname
+                ? 'bg-blue-100 font-semibold'
+                : 'bg-gray-100'
+            }`}
+          >
+            <div className="flex items-center">
+              <span className="mr-4 text-lg font-bold">{index + 1}.</span>
+              <span className="text-lg">{user.nickname}</span>
+            </div>
+            <span className="text-lg font-bold text-blue-600">{user.score}개</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+
     );
 }
 

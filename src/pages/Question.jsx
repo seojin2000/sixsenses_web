@@ -124,21 +124,29 @@ function Question() {
     if (checked === 0) {
       // 정답 입력 전
       return (
-        <form id="inputForm" onSubmit={onCheckAnswer}  className="flex flex-col items-center gap-4 w-full px-6">
-          <input
-            type="text"
-            className="outline outline-offset-2 outline-black-500/50 w-3/4 px-4 py-2 rounded-md text-lg placeholder:text-center"
-            value={answer}
-            placeholder="정답을 입력하세요"
-            onChange={(e) => setAnswer(e.target.value)}
-          />
-          <button
-            type="button"
-            className="outline outline-offset-2 outline-green-500/50 hover:bg-green-500 hover:text-white transition-colors px-4 py-1 rounded-md"
-            onClick={onCheckAnswer}>
-            <AiFillCaretRight />
-          </button>
-        </form>
+    <form
+      id="inputForm"
+      onSubmit={onCheckAnswer}
+      className="flex flex-col items-center w-full gap-4"
+    >
+      {/* 입력 필드 */}
+      <input
+        type="text"
+        className="w-3/4 px-4 py-3 border border-gray-300 rounded-lg text-center text-lg placeholder-gray-400 focus:ring-2 focus:ring-blue-400 outline-none"
+        value={answer}
+        placeholder="정답을 입력하세요"
+        onChange={(e) => setAnswer(e.target.value)}
+      />
+
+      {/* 제출 버튼 */}
+      <button
+        type="button"
+        className="flex items-center justify-center w-12 h-12 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-md transition-all"
+        onClick={onCheckAnswer}
+      >
+        <AiFillCaretRight size={24} />
+      </button>
+    </form>
       );
     } else if (checked === 1) {
       // 오답
@@ -148,10 +156,10 @@ function Question() {
           <p>{question.word} ({question.hanja})</p>
           {/* <p className="text-gray-500 text-sm">{question.meaning}</p> */}
           <button
-            className="outline outline-offset-2 outline-green-500/50 hover:bg-green-500 hover:text-white transition-colors px-4 py-1 rounded-md"
+            className="flex items-center justify-center w-12 h-12 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-md transition-all"
             onClick={onNextQuestion}
           >
-            <AiFillCaretRight />
+            <AiFillCaretRight size={24} />
           </button>
         </div>
       );
@@ -162,10 +170,10 @@ function Question() {
           <p className="text-blue-500 font-semibold">정답입니다</p>
           <p>{question.word} ({question.hanja})</p>
           <button
-            className="outline outline-offset-2 outline-green-500/50 hover:bg-green-500 hover:text-white transition-colors px-4 py-1 rounded-md"
+            className="flex items-center justify-center w-12 h-12 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-md transition-all"
             onClick={onNextQuestion}
           >
-            <AiFillCaretRight />
+            <AiFillCaretRight size={24} />
           </button>
         </div>
       );
@@ -173,13 +181,14 @@ function Question() {
   };
 
   return (
-    <div className="flex items-center min-h-screen bg-gray-100">
-      <div className="w-[390px] h-[874px] bg-white rounded-lg shadow-lg flex flex-col justify-start items-center px-4">
-      <div className="w-full text-center pt-2">
-      <p className="text-lg font-semibold">문제 {count + 1}/10</p>
-    </div>
-        <div className="text-center absolute bottom-1/2 p-4">
-          <p className="text-xl font-bold pb-5">{question.meaning}</p>
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 via-white to-blue-50">
+    <div className="w-[390px] h-auto bg-white rounded-lg shadow-2xl flex flex-col items-center p-6">
+      {/* 문제 정보 */}
+      <div className="w-full text-center py-2">
+        <p className="text-lg font-semibold text-gray-600">문제 {count + 1}/10</p>
+      </div>
+      <div className="text-center my-10">
+      <p className="text-2xl font-bold text-gray-800 pb-5">{question.meaning}</p>
           {renderForm()}
         </div>
         
