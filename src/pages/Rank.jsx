@@ -11,6 +11,7 @@ const Rank = () => {
   const navigate = useNavigate();
   const nickname = location.state?.nickname; // 현재 사용자 닉네임
   const correctAnswers = location.state?.correctAnswers;
+  const incorrect = location.state?.incorrect;
 
   // 사용자 데이터와 본인 등수 가져오기
   useEffect(() => {
@@ -44,6 +45,10 @@ const Rank = () => {
 
   // 토글 상태에 따라 표시할 사용자 목록 결정
   const displayUsers = isToggled ? getSurroundingUsers() : users;
+
+  const showIncorrect = () => {
+    alert('안녕');
+  }
 
   if (loading) {
     return <div>Loading...</div>; // 로딩 중 표시
@@ -115,7 +120,7 @@ const Rank = () => {
               </button>
               <button
                 className="flex-1 bg-yellow-300 py-3 rounded-md hover:bg-yellow-400 transition-colors"
-                //onClick={() => navigate("/")}
+                onClick={showIncorrect}
               >
                 오답노트
               </button>

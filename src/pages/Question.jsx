@@ -21,6 +21,8 @@ function Question() {
   const [checked, setChecked] = useState(0); // 0=대기,1=오답,2=정답
   const [count, setCount] = useState(0);     // 풀 문제수
   const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [incorrect, setIncorrect] = useState([])
+
 
   // (1) DB에서 랜덤 사자성어 불러오기
   const loadRandomIdiom = () => {
@@ -72,6 +74,7 @@ function Question() {
       setCorrectAnswers(prev => prev + 1);
     } else {
       setChecked(1); // 오답
+      setIncorrect([...incorrect, question]);
     }
     setCount(prev => prev + 1);
   };
@@ -86,16 +89,17 @@ function Question() {
               .post("http://localhost:8080/api/users/updateScore", null, {
                   params: {
                       nickname: nickname,
-                      score: correctAnswers, // 맞힌 문제 수
+                      score: correctAnswers, // 맞힌 문제 수,
+                      
                   },
               })
               .then((response) => {
                   console.log(response.data);
-                  navigate("/Rank", { state: { nickname, correctAnswers } });
+                  navigate("/Rank", { state: { nickname, correctAnswers,incorrect } });
               })
               .catch((err) => {
                   console.error("점수 저장 실패:", err);
-                  navigate("/Rank", { state: { nickname, correctAnswers } });
+                  navigate("/Rank", { state: { nickname, correctAnswers,incorrect } });
               });
       } else {
           loadRandomIdiom();
@@ -132,7 +136,7 @@ function Question() {
       {/* 입력 필드 */}
       <input
         type="text"
-        className="w-3/4 px-4 py-3 border border-gray-300 rounded-lg text-center text-lg placeholder-gray-400 focus:ring-2 focus:ring-blue-400 outline-none"
+        className="px-4 py-3 border border-gray-300 rounded-lg text-center text-lg placeholder-gray-400 focus:ring-2 focus:ring-blue-400 outline-none"
         value={answer}
         placeholder="정답을 입력하세요"
         onChange={(e) => setAnswer(e.target.value)}
